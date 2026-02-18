@@ -1,8 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import colors from "colors";
 import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/authRoutes.js"; 
 import errorHandler from "./middleware/errorHandler.js";
 import connectDB from "./config/database.js";
 
@@ -15,12 +15,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Logger middleware 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`.gray);
   next();
 });
 
+// Routes
 app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes); 
 
 // Home route
 app.get("/", (req, res) => {
@@ -33,6 +36,7 @@ app.get("/", (req, res) => {
   });
 });
 
+// Health check route
 app.get("/health", (req, res) => {
   res.json({
     status: "OK",
@@ -42,6 +46,7 @@ app.get("/health", (req, res) => {
   });
 });
 
+// 404 handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,
@@ -54,13 +59,14 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-// Start the server FIRST
+// Start the server
 const server = app.listen(PORT, () => {
   console.log(
     `✅ Server running in ${process.env.NODE_ENV || "development"} mode on port ${PORT}`
       .yellow.bold,
   );
 
+  // Connect to database
   connectDB().then(() => {
     console.log("📦 Database connection attempt completed".green);
   });
