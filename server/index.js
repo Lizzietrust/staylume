@@ -3,6 +3,10 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import userRoutes from "./routes/userRoutes.js";
 import authRoutes from "./routes/authRoutes.js"; 
+import hotelRoutes from "./routes/hotelRoutes.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
+import wishlistRoutes from "./routes/wishlistRoutes.js";
 import errorHandler from "./middleware/errorHandler.js";
 import connectDB from "./config/database.js";
 
@@ -23,7 +27,11 @@ app.use((req, res, next) => {
 
 // Routes
 app.use("/api/users", userRoutes);
-app.use("/api/auth", authRoutes); 
+app.use("/api/auth", authRoutes);
+app.use("/api/hotels", hotelRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/hotels/:hotelId/reviews", reviewRoutes);
+app.use("/api/wishlist", wishlistRoutes);
 
 // Home route
 app.get("/", (req, res) => {
