@@ -103,6 +103,7 @@ export const getHotel = async (req, res, next) => {
   }
 };
 
+
 export const createHotel = async (req, res, next) => {
   try {
     const hotel = await Hotel.create(req.body);
