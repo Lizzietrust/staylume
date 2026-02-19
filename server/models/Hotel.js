@@ -35,8 +35,7 @@ const hotelSchema = new mongoose.Schema(
     ],
     pricePerNight: {
       type: Number,
-      required: [true, "Please add price per night"],
-      min: 0,
+      required: true,
     },
     amenities: [
       {
@@ -87,14 +86,8 @@ const hotelSchema = new mongoose.Schema(
       website: String,
     },
     policies: {
-      checkIn: {
-        type: String,
-        default: "14:00",
-      },
-      checkOut: {
-        type: String,
-        default: "11:00",
-      },
+      checkIn: { type: String, default: "14:00" },
+      checkOut: { type: String, default: "11:00" },
       cancellationPolicy: {
         type: String,
         enum: ["flexible", "moderate", "strict"],
@@ -108,19 +101,25 @@ const hotelSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    toJSON: {
-      transform: function (doc, ret) {
-        delete ret.__v;
-        return ret;
-      },
-    },
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   },
 );
 
-// Index for geospatial queries
-hotelSchema.index({ location: "2dsphere" });
+hotelSchema.virtual("rooms", {
+  ref: "Room",
+  localField: "_id",
+  foreignField: "hotel",
+});
 
-// Index for text search
+hotelSchema.virtual("reviews", {
+  ref: "Review",
+  localField: "_id",
+  foreignField: "hotel",
+});
+
+/* Indexes */
+hotelSchema.index({ location: "2dsphere" });
 hotelSchema.index({
   name: "text",
   description: "text",
