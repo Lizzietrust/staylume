@@ -1,34 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+
+@theme {
+  /* 1. Define the font family */
+  --font-beVietnamPro:
+    "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  --color-bg-primary: var(--bg-p);
+  --color-bg-secondary: var(--bg-s);
+  --color-bg-card: var(--bg-c);
+  --color-text-primary: var(--text-p);
+  --color-text-secondary: var(--text-s);
+  --color-text-tertiary: var(--text-t);
+  --color-accent: var(--acc);
+  --color-accent-hover: var(--acc-h);
+  --color-accent-light: var(--acc-l);
+  --color-border-color: var(--border-c);
+}
 
 @layer base {
   :root {
-    /* Dark mode (default) */
-    --bg-primary: #121212;
-    --bg-secondary: #1e1e1e;
-    --bg-card: #2d2d2d;
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b0;
-    --accent-primary: #10b981;
-    --accent-hover: #059669;
-    --accent-light: #34d399;
-    --border-color: #404040;
+    --bg-p: #0f1115;
+    --bg-s: #1e1e1e;
+    --bg-c: #2d2d2d;
+    --text-p: #0f1115;
+    --text-s: #cbd5e1;
+    --text-t: #e2e8f0;
+    --acc: #50c878;
+    --acc-h: #3a9e5e;
+    --acc-l: #34d399;
+    --border-c: #404040;
   }
 
-  [data-theme="light"] {
-    --bg-primary: #f9fafb;
-    --bg-secondary: #ffffff;
-    --bg-card: #ffffff;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
-    --accent-primary: #059669;
-    --accent-hover: #047857;
-    --accent-light: #10b981;
-    --border-color: #e5e7eb;
-  }
+  /* [data-theme="light"] {
+    --bg-p: #f9fafb;
+    --bg-s: #ffffff;
+    --bg-c: #ffffff;
+    --text-p: #111827;
+    --text-s: #6b7280;
+    --text-t: #e2e8f0;
+    --acc: #059669;
+    --acc-h: #3A9E5E;
+    --acc-l: #10b981;
+    --border-c: #e5e7eb;
+  } */
 
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+    background-color: var(--bg-p);
+    color: var(--text-p);
+    font-family: var(--font-beVietnamPro);
     transition:
       background-color 0.3s,
       color 0.3s;
