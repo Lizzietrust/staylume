@@ -1,6 +1,8 @@
 import heroBg from "../../assets/images/hero-bg.webp";
 
 const HeroSection = () => {
+
+
   return (
     <section className="relative h-150 flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -10,11 +12,7 @@ const HeroSection = () => {
           alt="hero image"
           className="w-full h-full object-cover"
         />
-        {/* <div
-          className={`absolute inset-0 ${
-            mode === "dark" ? "bg-black/60" : "bg-black/40"
-          }`}
-        /> */}
+        <div className={`absolute inset-0 bg-black/60`} />
       </div>
 
       {/* Content */}
